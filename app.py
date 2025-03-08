@@ -33,8 +33,12 @@ def get_acc(identify):
 
 # Read a file and return binary
 def read_binfile(pathname):
-    with open(pathname, "rb") as file:
-        return file.read()
+    try:
+        with open(pathname, "rb") as file:
+            return file.read()
+    except FileNotFoundError:
+        return b""
+
 
 # L value cyclically - steganography
 def L_dynamic(idx):

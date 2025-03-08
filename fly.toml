@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # fly.toml app configuration file generated for steganography on 2025-03-08T05:53:11Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
@@ -21,3 +22,7 @@ primary_region = 'dfw'
   cpu_kind = 'shared'
   cpus = 1
   memory_mb = 1024
+=======
+app = "steganography"
+
+>>>>>>> 4b5470b (Fly)
