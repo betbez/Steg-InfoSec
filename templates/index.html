@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Steganography Web App</title>
+</head>
+<body>
+    <h2>Steganography Web App</h2>
+    {% if user.is_authenticated %}
+      <p>User: {{ user.id }} | <a href="{{ url_for('signout') }}">Sign Out</a></p>
+    {% else %}
+      <p>
+        <a href="{{ url_for('signin') }}">Sign In</a> |
+        <a href="{{ url_for('signup') }}">Sign Up</a>
+      </p>
+    {% endif %}
+    
+    <h3>Embed M to P (Requires Login)</h3>
+    <form action="/hide" method="post" enctype="multipart/form-data">
+        <label>Carrier Image (P):</label>
+        <input type="file" name="image" required><br><br>
+        <label>Message File (M):</label>
+        <input type="file" name="message" required><br><br>
+        <button type="submit">Embed</button>
+    </form>
+
+    <h3>Extract the (M) from a (P)</h3>
+    <form action="/extract" method="post" enctype="multipart/form-data">
+        <label>Carrier:</label>
+        <input type="file" name="image" required><br><br>
+        <button type="submit">Extract</button>
+    </form>
+
+    <h3>View Modified Files</h3>
+    <a href="{{ url_for('list_files') }}">View Files</a>
+</body>
+</html>
