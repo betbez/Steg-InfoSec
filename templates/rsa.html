@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RSA Operations</title>
+</head>
+<body>
+  <h1>RSA Operations</h1>
+  
+  <!-- RSA Key Generation Section -->
+  <h2>Generate RSA Key Pair</h2>
+  <p><a href="{{ url_for('rsa_generate') }}">Generate Keys</a></p>
+
+  {% if public_key and private_key %}
+    <h3>Your Generated RSA Key Pair (Copy Entire Text)</h3>
+    <h4>Public Key:</h4>
+    <pre style="background-color: #f0f0f0; padding: 10px; border: 1px solid #ccc;">{{ public_key }}</pre>
+    <h4>Private Key:</h4>
+    <pre style="background-color: #f0f0f0; padding: 10px; border: 1px solid #ccc;">{{ private_key }}</pre>
+  {% endif %}
+  
+  <!-- RSA Encryption Form -->
+  <h2>RSA Encryption</h2>
+  <form action="/rsa_encrypt" method="post" enctype="multipart/form-data">
+    <div>
+      <label for="rsa_encrypt_file">Choose file to encrypt:</label>
+      <input type="file" name="file" id="rsa_encrypt_file" required>
+    </div>
+    <br>
+    <div>
+      <label for="pub_key_input">Enter Public Key (PEM format):</label>
+      <textarea name="pub_key" id="pub_key_input" rows="10" cols="50" placeholder="Paste public key" required></textarea>
+    </div>
+    <br>
+    <button type="submit">Encrypt with RSA</button>
+  </form>
+  
+  <!-- RSA Decryption Form -->
+  <h2>RSA Decryption</h2>
+  <form action="/rsa_decrypt" method="post" enctype="multipart/form-data">
+    <div>
+      <label for="rsa_decrypt_file">Choose file to decrypt:</label>
+      <input type="file" name="file" id="rsa_decrypt_file" required>
+    </div>
+    <br>
+    <div>
+      <label for="priv_key_input">Enter Private Key (PEM format):</label>
+      <textarea name="priv_key" id="priv_key_input" rows="10" cols="50" placeholder="Paste private key" required></textarea>
+    </div>
+    <br>
+    <button type="submit">Decrypt with RSA</button>
+  </form>
+  
+  <br>
+  <a href="{{ url_for('home') }}">Return Home</a>
+  
+  <!-- Flash Messages (if any) -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul>
+        {% for category, message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+</body>
+</html>

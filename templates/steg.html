@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Steganography</title>
+</head>
+<body>
+  <h1>Steganography</h1>
+  
+  <!-- Form for Hiding a Message -->
+  <h2>Hide a Message in an Image</h2>
+  <form action="/hide" method="post" enctype="multipart/form-data">
+    <div>
+      <label for="carrier">Carrier Image (P):</label>
+      <input type="file" name="image" id="carrier" required>
+    </div>
+    <br>
+    <div>
+      <label for="message">Secret Message File (M):</label>
+      <input type="file" name="message" id="message" required>
+    </div>
+    <br>
+    <div>
+      <label for="start">Start (S):</label>
+      <input type="number" name="start" id="start" value="0">
+    </div>
+    <br>
+    <div>
+      <label for="step_length">Step Length (L):</label>
+      <input type="number" name="step_length" id="step_length" value="8">
+    </div>
+    <br>
+    <div>
+      <label for="mode_c">Dynamic Mode (C):</label>
+      <input type="checkbox" name="mode_c" id="mode_c" value="True">
+    </div>
+    <br>
+    <button type="submit">Hide Message</button>
+  </form>
+  
+  <br>
+  
+  <!-- Form for Extracting a Message -->
+  <h2>Extract a Message from an Image</h2>
+  <form action="/extract" method="post" enctype="multipart/form-data">
+    <div>
+      <label for="stego_image">Stego Image:</label>
+      <input type="file" name="image" id="stego_image" required>
+    </div>
+    <br>
+    <div>
+      <label for="extract_start">Start (S):</label>
+      <input type="number" name="start" id="extract_start" value="0">
+    </div>
+    <br>
+    <div>
+      <label for="extract_step">Step Length (L):</label>
+      <input type="number" name="step_length" id="extract_step" value="8">
+    </div>
+    <br>
+    <div>
+      <label for="extract_mode">Dynamic Mode (C):</label>
+      <input type="checkbox" name="mode_c" id="extract_mode" value="True">
+    </div>
+    <br>
+    <button type="submit">Extract Message</button>
+  </form>
+  
+  <br>
+  <a href="{{ url_for('home') }}">Return Home</a>
+  
+  <!-- Flash Messages (if any) -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul>
+        {% for category, message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+</body>
+</html>

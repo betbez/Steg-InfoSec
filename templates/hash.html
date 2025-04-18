@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>File Hashing</title>
+</head>
+<body>
+  <h1>File Hashing</h1>
+  <form action="/hash" method="post" enctype="multipart/form-data">
+    <label for="file">Choose a file:</label>
+    <input type="file" name="file" id="file" required><br><br>
+    <label for="method">Hash Method:</label>
+    <select name="method" id="method">
+      <option value="sha256">SHA-256</option>
+      <option value="sha3_256">SHA3-256</option>
+    </select><br><br>
+    <button type="submit">Compute Hash</button>
+  </form>
+  <p id="result"></p>
+  <script>
+    document.querySelector("form").addEventListener("submit", function(e){
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+      fetch("/hash", {
+        method: "POST",
+        body: data
+      })
+      .then(response => response.json())
+      .then(json => {
+        document.getElementById("result").innerText = "Hash (" + json.hash_method + "): " + json.hash;
+      })
+      .catch(error => {
+         document.getElementById("result").innerText = "Error computing hash.";
+      });
+    });
+  </script>
+  <p><a href="{{ url_for('home') }}">Return Home</a></p>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Encrypt File</title>
+</head>
+<body>
+  <h1>Encrypt a File</h1>
+  <form action="/encrypt" method="post" enctype="multipart/form-data">
+    <div>
+      <label for="file">Choose file to encrypt:</label>
+      <input type="file" name="file" id="file" required>
+    </div>
+    <br>
+    <div>
+      <label for="algorithm">Algorithm:</label>
+      <select name="algorithm" id="algorithm" required>
+        <option value="AES-128">AES 128</option>
+        <option value="AES-256">AES 256</option>
+        <option value="3DES">3DES</option>
+      </select>
+    </div>
+    <br>
+    <br>
+
+    <label for="mode">AES Mode:</label>
+    <select name="mode" id="mode" required>
+        <option value="CBC">CBC</option>
+        <option value="CTR">CTR</option>
+    </select>
+
+    <button type="submit">Encrypt</button>
+  </form>
+  <br>
+  {% if key_hex %}
+    <hr>
+    <h2>Encryption Result</h2>
+    <p><strong>Key (hex):</strong> <code>{{ key_hex }}</code></p>
+    <p><a href="{{ download_url }}">Download Encrypted File</a></p>
+  {% endif %}
+
+  <br>
+  <a href="/">Return Home</a>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Decrypt File</title>
+</head>
+<body>
+  <h1>Decrypt a File</h1>
+  <form action="/decrypt" method="post" enctype="multipart/form-data">
+    <div>
+      <label for="file">Choose file to decrypt:</label>
+      <input type="file" name="file" id="file" required>
+    </div>
+    <br>
+    <div>
+      <label for="algorithm">Algorithm:</label>
+      <select name="algorithm" id="algorithm" required>
+        <option value="AES-128">AES 128</option>
+        <option value="AES-256">AES 256</option>
+        <option value="3DES">3DES</option>
+      </select>
+    </div>
+    <br>
+    <label for="mode">AES Mode:</label>
+    <select name="mode" id="mode" required>
+        <option value="CBC">CBC</option>
+        <option value="CTR">CTR</option>
+    </select>
+    <br>
+    <div>
+      <label for="key">Enter Key (Hexadecimal):</label>
+      <input type="text" name="key" id="key" placeholder="Paste key in hex" required>
+    </div>
+    <br>
+    <button type="submit">Decrypt</button>
+  </form>
+  <br>
+  <a href="/">Return Home</a>
+</body>
+</html>
