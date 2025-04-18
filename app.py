@@ -596,4 +596,4 @@ def download_file(filename):
     return send_file(os.path.join(OUTPUT_DIR, filename), as_attachment=True)
 
 if __name__ == '__main__':
-    website.run(debug=True, port=5008)
+    website.run(debug=True, port=8080)
